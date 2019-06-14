@@ -38,7 +38,7 @@ class peer(object):
         print "sport: %s" % sport;
         print "dport: %s" % dport;
 
-        send(IP(dst=ip_peer, ttl=hop_cutoff) / UDP(sport=sport, dport=dport) / Raw(load="\x00\x00"),verbose=False);
+        self.reservePortTemp(sport,dport,ttl);
         print "sent falloff packet.. rest timeframe";
         sleep(sleep_time);
 
@@ -65,7 +65,7 @@ class peer(object):
             if not port:
                 portRes = self.doPortPunchNegotiation();
             else:
-                portRes = self.doPortPunchNegotiation(static_dport=port) if mode == 0 else self.doPortPunchNegotiation(static_sport=port) if mode == 1 else self.doPortPunchNegotiation(static_sport=port,static_dport=port);
+                portRes = self.doPortPunchNegotiation(static_sport=port) if mode == 0 else self.doPortPunchNegotiation(static_dport=port) if mode == 1 else self.doPortPunchNegotiation(static_sport=port,static_dport=port);
             if portRes:
                 return portRes;
         return None;
