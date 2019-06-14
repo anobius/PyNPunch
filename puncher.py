@@ -38,7 +38,7 @@ class peer(object):
         print "sport: %s" % sport;
         print "dport: %s" % dport;
 
-        self.reservePortTemp(sport,dport,ttl);
+        self.reservePortTemp(sport,dport,hop_cutoff);
         print "sent falloff packet.. rest timeframe";
         sleep(sleep_time);
 
